@@ -149,7 +149,7 @@ function checkout() {
     /* SUCCESS MESSAGE */
 alert("Order placed successfully! We will contact you shortly.");
 
-    window.open(`https://wa.me/221787305289?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/2349030400538?text=${encodeURIComponent(message)}`, "_blank");
 }
 
 /* SIMPLE WHATSAPP ORDER */
@@ -164,7 +164,7 @@ function sendWhatsappOrder() {
     let message =
 `Hello Chii-Mayor Business Ventures,\n\nI would like to place the following order:\n\n${order}\n\nTotal Amount: ₦${total.toLocaleString()}\n\nThank you.`;
 
-    window.open(`https://wa.me/221787305289?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/2349030400538?text=${encodeURIComponent(message)}`, "_blank");
 }
 
 /* SCROLL TO TOP BUTTON */
