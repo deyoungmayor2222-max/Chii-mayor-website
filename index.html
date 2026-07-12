@@ -3,30 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chii-Mayor Business Ventures</title>
+  <title>Premium Wine Shop in Owerri And Nearby Places| Wines, Spirits & Drinks | Chii-Mayor Business Ventures</title>
 
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="images/favicon.png">
-  <meta name="description" content="Chii-Mayor-Business-Ventures sells quality wines, hot drinks and spirits in Nigeria.">
+  <meta name="description" content="Buy authentic wines, champagne, whisky, cognac, vodka, juices and soft drinks in Owerri. Fast delivery, wholesale prices and secure payment.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Store",
-    "name":"Chii-Mayor Business Ventures",
-    "url":"https://chii-mayor.vercel.app",
-    "telephone":"+2349030400538",
-    "logo":"images/Chii-logo.png",
-    "address":{
+{
+  "@context":"https://schema.org",
+  "@type":"LiquorStore",
+  "name":"Chii-Mayor Business Ventures",
+  "url":"https://chii-mayor.vercel.app",
+  "telephone":"+2349030400538",
+  "email":"deyoungmayor2222@gmail.com",
+  "logo":"https://chii-mayor.vercel.app/images/Chii-logo.png",
+  "openingHours":"Mo-Sa 09:00-22:00",
+
+  "address":{
       "@type":"PostalAddress",
       "streetAddress":"127 Alaba Market",
       "addressLocality":"Owerri",
       "addressRegion":"Imo State",
-      "addressCountry":"Nigeria"
+      "addressCountry":"NG"
+  },
+
+  "department":[
+    {
+      "@type":"LiquorStore",
+      "name":"Lekki Branch",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Itedo Market, Freedom Way, Lekki Phase 1",
+        "addressLocality":"Lekki",
+        "addressRegion":"Lagos State",
+        "addressCountry":"NG"
+      }
     }
-  }
-  </script>
+  ]
+}
+</script>
 
   <meta property="og:title" content="Chii-Mayor Business Ventures">
   <meta property="og:description" content="Quality wines, hot drinks, spirits, juices and can drinks in Owerri.">
@@ -44,10 +61,10 @@
 
   <nav class="navbar">
     <a href="#wine">Wine</a>
-    <a href="#hot">Hot Drinks</a>
+    <a href="#whiskey">Whiskey</a>
     <a href="#spirits">Spirits</a>
     <a href="#juice">Juice</a>
-    <a href="#soft">Can Drinks</a>
+    <a href="#soft">Soft Drinks</a>
     <a href="#contact">Contact</a>
     <a href="#cart">Cart (<span id="cart-count">0</span>)</a>
     <input type="text" id="search" placeholder="Search products..." onkeyup="searchProduct()">
@@ -55,13 +72,42 @@
 
   <section class="hero">
    <h2>Premium Wines, Spirits & Refreshing Drinks Delivered Fast</h2>
+
+   <p>Order authentic wines, champagne, whisky, cognac, vodka, juices and soft drinks
+at unbeatable prices with same-day delivery.</p>
     <button onclick="welcomeMessage()">Shop Now</button>
   </section>
+
+<section class="cta">
+<h2>Need Drinks for a Party?</h2>
+<p>Birthday • Wedding • Burial • Club • Corporate Events • Home Delivery</p>
+<a href="tel:09030400538">Call Now</a>
+</section>
 
   <section class="featured">
     <h2>Featured Products</h2>
     <p>Top selling wines and spirits available today.</p>
   </section>
+
+<section class="brands">
+    <h2>Shop by Brand</h2>
+    <p>We stock trusted local and international brands.</p>
+
+    <div class="brand-grid">
+        <span>Hennessy</span>
+        <span>Martell</span>
+        <span>Jameson</span>
+        <span>Campari</span>
+        <span>Gordon's</span>
+        <span>Jack Daniel's</span>
+        <span>Moët & Chandon</span>
+        <span>Veuve Clicquot</span>
+        <span>Four Cousins</span>
+        <span>Carlo Rossi</span>
+        <span>Black Bullet</span>
+        <span>Chivita</span>
+    </div>
+</section>
 
   <section class="promo">
     <h2>Special Offer</h2>
@@ -72,10 +118,30 @@
   <section id="cart">
     <h2>Shopping Cart</h2>
     <ul id="cart-items"></ul>
-    <p>Total: ₦<span id="total">0</span></p>
-    <p>Date: <span id="order-date"></span></p>
+    <p>Subtotal: ₦<span id="subtotal">0</span></p>
+<p>Delivery Fee: ₦<span id="delivery-fee">0</span></p>
+<h3>Grand Total: ₦<span id="grand-total">0</span></h3>
+<p>Date: <span id="order-date"></span></p>
 
-    <div class="bank-details">
+<h3>Delivery Method</h3>
+<label><input type="radio" name="delivery" value="Home Delivery" checked>
+    🚚 Home Delivery</label>
+<br><br>
+<label><input type="radio" name="delivery" value="Pickup from Shop"> 🏪 Pickup from Shop</label>
+<br><br>
+<div id="pickup-info" style="display: none;">
+    <h4>Pickup Address</h4>
+
+    <p>Chii-Mayor Business Ventures<br>
+       ✔ No.127 Alaba Market,<br>
+        Owerri, Imo State.</p>
+
+    <p>Chii-Mayor Business Ventures<br>
+       ✔ Itedo Market, Freedom Way,<br>
+        Lekki Phase 1, Lagos.</p>
+</div>
+
+    <div class="bank-details" id="bank-details">
   <h3>Bank Transfer</h3>
   <p><strong>Bank:</strong> Opay</p>
   <p><strong>Account Name:</strong> Chii-Mayor Business Ventures</p>
@@ -88,8 +154,10 @@
       <label for="customer-name">Full Name</label>
       <input type="text" id="customer-name" name="customer-name" placeholder="Enter Your Full Name" required>
       <br>
-      <label for="customer-address">Address</label>
-      <input type="text" id="customer-address" name="customer-address" placeholder="Enter Delivery Address" required>
+      <div id="address-group">
+      <label for="customer-address">Delivery Address</label>
+      <input type="text" id="customer-address" placeholder="Enter Delivery Address">
+</div>
       <br>
       <label for="customer-phone">Phone Number</label>
       <input type="tel" id="customer-phone" name="customer-phone" pattern="[0-9]{10,14}" placeholder="Enter Phone Number" required>
@@ -99,11 +167,14 @@
     </form>
 
     <br>
-    <button onclick="clearCart()">Clear Cart</button>
+    <button onclick="clearCart()">🗑️ Clear Cart</button>
     <br><br>
-    <button onclick="checkout()">Proceed to Checkout</button>
-    <br><br>
-    <button onclick="sendWhatsappOrder()">Order via WhatsApp</button>
+    <button id="pay-btn" onclick="checkout()">💳 Pay Securely with Paystack
+ </button>
+  <br><br>
+   <button onclick="sendWhatsappOrder()">📱 Order via WhatsApp</button>
+<br><br>
+<div id="payment-status"></div>
   </section>
 
   <section id="wine">
@@ -112,9 +183,14 @@
       <div class="card">
         <img src="images/4ae0101d-f5a3-49c5-813e-2fc5f7bfcafc_14_watermark.jpeg" loading="lazy" alt="Red Wine">
         <h3>Classic Red Wine</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
+        <p class="volume">750ml</p>
+        <span class="badge">Original Product</span>
         <p>A rich and fruity red wine, perfect for any occasion.</p>
         <p>₦10,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-wine" value="1" min="1">
         <button onclick="addWithQty('Classic Red Wine',10000,'qty-wine')">Add to Cart</button>
@@ -123,9 +199,14 @@
       <div class="card">
         <img src="images/White-Wine-Case-Hook-Norton-Brewery-01.jpg" loading="lazy" alt="White Wine">
         <h3>Crisp White Wine</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
+        <p class="volume">750ml</p>
+        <span class="badge">Original Product</span>
         <p>A refreshing and crisp white wine, best served chilled.</p>
         <p>₦12,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-whitewine" value="1" min="1">
         <button onclick="addWithQty('Crisp White Wine',12000,'qty-whitewine')">Add to Cart</button>
@@ -134,9 +215,14 @@
       <div class="card">
         <img src="images/images.jpg" loading="lazy" alt="Champagne">
         <h3>Premium Champagne</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
+        <p class="volume">750ml</p>
+        <span class="badge">Original Product</span>
         <p>Celebrate your special moments with luxury sparkling wine.</p>
         <p>₦100,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-champagne" value="1" min="1">
         <button onclick="addWithQty('Premium Champagne',100000,'qty-champagne')">Add to Cart</button>
@@ -144,26 +230,32 @@
     </div>
   </section>
 
-  <section id="hot">
-    <h2>Hot Drinks</h2>
+  <section id="whiskey">
+    <h2>Whiskey</h2>
     <div class="products">
       <div class="card">
-        <img src="images/4ae0101d-f5a3-49c5-813e-2fc5f7bfcafc_13_watermark.jpeg" loading="lazy" alt="Premium Hot Drink Bottle">
-        <h3>Premium Hot Drinks</h3>
-        <p>Hot drinks served fresh.</p>
+        <img src="images/4ae0101d-f5a3-49c5-813e-2fc5f7bfcafc_13_watermark.jpeg" loading="lazy" alt="Premium Whiskey Bottle">
+        <h3>Premium Whiskey</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
+        <p>Smooth and rich whiskey experience.</p>
         <p>₦7,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
-        <input type="number" id="qty-hot1" value="1" min="1">
-        <button onclick="addWithQty('Premium Hot Drinks',7000,'qty-hot1')">Add to Cart</button>
+        <input type="number" id="qty-whiskey1" value="1" min="1">
+        <button onclick="addWithQty('Premium Whiskey',7000,'qty-whiskey1')">Add to Cart</button>
       </div>
 
       <div class="card">
         <img src="images/images-hot%20drink.jpg" loading="lazy" alt="Premium Hot Drinks">
         <h3>Whiskey Hot Blend</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>Hot drinks served fresh.</p>
         <p>₦25,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-hot2" value="1" min="1">
         <button onclick="addWithQty('Whiskey Hot Blend',25000,'qty-hot2')">Add to Cart</button>
@@ -172,9 +264,12 @@
       <div class="card">
         <img src="images/whiskey-hot.webp" loading="lazy" alt="Premium Hot Drinks">
         <h3>Premium Coffee Mix</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>Hot drinks served fresh.</p>
         <p>₦20,000</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-hot3" value="1" min="1">
         <button onclick="addWithQty('Premium Coffee Mix',20000,'qty-hot3')">Add to Cart</button>
@@ -187,10 +282,13 @@
     <div class="products">
       <div class="card">
         <img src="images/gordons-london-dry-gin-in-a-wholesale-GEFXXY.jpg" loading="lazy" alt="Premium Spirits Bottle">
-        <h3>Premium Spirits</h3>
+        <h3>Premium Gin</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>Premium distilled beverages.</p>
         <p>₦5,800</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-spirit" value="1" min="1">
         <button onclick="addWithQty('Premium Spirits',5800,'qty-spirit')">Add to Cart</button>
@@ -199,9 +297,12 @@
       <div class="card">
         <img src="images/Best-gin.jpg" loading="lazy" alt="Premium Dry Gin">
         <h3>Premium Dry Gin</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A smooth and refreshing dry gin.</p>
         <p>₦4,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-gin" value="1" min="1">
         <button onclick="addWithQty('Premium Dry Gin',4500,'qty-gin')">Add to Cart</button>
@@ -210,9 +311,12 @@
       <div class="card">
         <img src="images/Premium Vodka.webp" loading="lazy" alt="Premium Vodka">
         <h3>Premium Vodka</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A premium vodka with a smooth and clean taste.</p>
         <p>₦5,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-vodka" value="1" min="1">
         <button onclick="addWithQty('Premium Vodka',5500,'qty-vodka')">Add to Cart</button>
@@ -226,9 +330,12 @@
       <div class="card">
         <img src="images/chivita-orange.png" loading="lazy" alt="Chivita Orange Juice">
         <h3>Chivita Orange Juice</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>Refreshing orange juice rich in vitamins.</p>
         <p>₦2,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-chivita" value="1" min="1">
         <button onclick="addWithQty('Chivita Orange Juice',2500,'qty-chivita')">Add to Cart</button>
@@ -237,9 +344,12 @@
       <div class="card">
         <img src="images/Exotic-juice.jpg" loading="lazy" alt="Exotic Juice Blend">
         <h3>Exotic Juice Blend</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A delicious blend of tropical fruits.</p>
         <p>₦1,700</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-juice2" value="1" min="1">
         <button onclick="addWithQty('Exotic Juice Blend',1700,'qty-juice2')">Add to Cart</button>
@@ -248,9 +358,12 @@
       <div class="card">
         <img src="images/5alive-juice.jpg" loading="lazy" alt="5alive Fruit Juice">
         <h3>5alive Fruit Juice</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A vibrant and flavorful berry juice.</p>
         <p>₦1,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-juice4" value="1" min="1">
         <button onclick="addWithQty('5alive Fruit Juice',1500,'qty-juice4')">Add to Cart</button>
@@ -259,9 +372,12 @@
       <div class="card">
         <img src="images/Frutta-Foods-and-Services-jpg.webp" loading="lazy" alt="Frutta Refreshing Juice Bottle">
         <h3>Frutta Refreshing Juice</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A zesty and refreshing citrus juice.</p>
         <p>₦1,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-juice3" value="1" min="1">
         <button onclick="addWithQty('Frutta Refreshing Juice',1500,'qty-juice3')">Add to Cart</button>
@@ -270,9 +386,12 @@
       <div class="card">
         <img src="images/Five-Alive.webp" loading="lazy" alt="Five-Alive Fruit Juice">
         <h3>Five-Alive Fruit Juice</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A delicious blend of mixed fruits.</p>
         <p>₦1,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-juice5" value="1" min="1">
         <button onclick="addWithQty('Five-Alive Fruit Juice',1500,'qty-juice5')">Add to Cart</button>
@@ -281,9 +400,12 @@
       <div class="card">
         <img src="images/Hollandia-yoghurt-large.png" loading="lazy" alt="Hollandia Yoghurt">
         <h3>Hollandia Yoghurt</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A creamy and delicious yoghurt.</p>
         <p>₦1,800</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-yoghurt" value="1" min="1">
         <button onclick="addWithQty('Hollandia Yoghurt',1800,'qty-yoghurt')">Add to Cart</button>
@@ -292,14 +414,17 @@
   </section>
 
   <section id="soft">
-    <h2>Can Drinks</h2>
+    <h2>Soft Drinks</h2>
     <div class="products">
       <div class="card">
         <img src="images/coca-cola.jpg" loading="lazy" alt="Coca-Cola Drink">
         <h3>Coca-Cola drink</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A classic and refreshing cola drink.</p>
         <p>₦500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-coke" value="1" min="1">
         <button onclick="addWithQty('Coca-Cola Drink',500,'qty-coke')">Add to Cart</button>
@@ -308,9 +433,12 @@
       <div class="card">
         <img src="images/can-malt.webp" loading="lazy" alt="Malt Drink">
         <h3>Malt Drink</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A refreshing and bold malt drink.</p>
         <p>₦700</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-malt" value="1" min="1">
         <button onclick="addWithQty('Malt Drink',700,'qty-malt')">Add to Cart</button>
@@ -319,9 +447,12 @@
       <div class="card">
         <img src="images/can-beer.png" loading="lazy" alt="Beer Drink">
         <h3>Beer Drink</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A refreshing beer drink.</p>
         <p>₦900</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-beer" value="1" min="1">
         <button onclick="addWithQty('Beer Drink',900,'qty-beer')">Add to Cart</button>
@@ -330,9 +461,12 @@
       <div class="card">
         <img src="images/bullet-drink.jpg" loading="lazy" alt="Black Bullet">
         <h3>Black Bullet</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A refreshing vodka mixed drink.</p>
         <p>₦1,500</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-bullet" value="1" min="1">
         <button onclick="addWithQty('Black Bullet',1500,'qty-bullet')">Add to Cart</button>
@@ -341,9 +475,12 @@
       <div class="card">
         <img src="images/bullet.jpg" loading="lazy" alt="Energy Drink">
         <h3>Energy Drink</h3>
+        <div class="rating">
+          <span>⭐⭐⭐⭐⭐</span>
+        </div>
         <p>A powerful energy drink to boost your day.</p>
         <p>₦1,200</p>
-        <p class="stock">Available ✔</p>
+        <p class="stock in-stock">In Stock ✔</p>
         <label>QTY:</label>
         <input type="number" id="qty-energy" value="1" min="1">
         <button onclick="addWithQty('Energy Drink',1200,'qty-energy')">Add to Cart</button>
@@ -354,16 +491,34 @@
   <section class="trust">
     <h2>Why Choose Us?</h2>
     <p>✔ Genuine Products 🥂</p>
-    <p>✔ Fast Delivery 🚚</p>
+    <p>✔ Same Day Delivery 🚚</p>
     <p>✔ Secure Payment 🔒</p>
     <p>✔ Excellent Customer Support 💬</p>
   </section>
+
+<section class="delivery">
+    <h2>🚚 We Deliver To</h2>
+
+    <div class="delivery-grid">
+        <div>📍 Owerri</div>
+        <div >📍 Lagos</div>
+        <div>📍 Port Harcourt</div>
+        <div>📍 Obigbo</div>
+        <div>📍 Aba</div>
+        <div>📍 Mbaise</div>
+        <div>📍 Orlu</div>
+        <div>📍 Umuahia</div>
+        <div>📍 Enugu (Bulk Orders)</div>
+    </div>
+
+    <p><strong>Need delivery outside these locations?</strong> Contact us for availability.</p>
+</section>
 
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <p>You can reach out to us on the following:</p>
     <p><strong>Business Name:</strong> Chii-Mayor Business Ventures</p>
-    <p><strong>Opening Hours:</strong> Monday – Saturday, 9:00 AM – 10:00 PM</p>
+    <p><strong>Business Hours:</strong> Monday – Saturday, 9:00 AM – 10:00 PM</p>
     <p><strong>Phone:📞 <a href="tel:09030400538">09030400538</a></strong></p>
     <p><strong>Phone: 📞<a href="tel:09030134298">09030134298</a></strong></p>
    <p>
@@ -380,11 +535,37 @@
 
     <p><strong>Instagram: <a href="https://instagram.com/deyoungmayor22" target="_blank" rel="noopener noreferrer">deyoungmayor22</a></strong></p>
 
-    <p><strong>Address: 📍 <a href="https://maps.google.com/?q=127+Alaba+Market+Owerri+Imo+State+Nigeria" target="_blank" rel="noopener noreferrer">No 127 Alaba Market, Owerri, Imo State, Nigeria.</a></strong></p>
+    <p><strong>Address 1: 📍 <a href="https://maps.google.com/?q=127+Alaba+Market+Owerri+Imo+State+Nigeria" target="_blank" rel="noopener noreferrer">No 127 Alaba Market, Owerri, Imo State, Nigeria.</a></strong></p>
 
     <p><strong>Address 2: 📍 <a href="https://maps.google.com/?q=Itedo+Market%2C+Freedom+Way%2C+Lekki+Phase+1%2C+Lekki%2C+Lagos%2C+Nigeria" target="_blank" rel="noopener noreferrer">Itedo Market, Freedom Way, Lekki Phase 1, Lekki, Lagos, Nigeria.</a></strong></p>
 
-    <p><strong>Delivery:</strong> Available in Owerri and nearby areas</p>
+<h3 class="map-title">📍 Visit Our Stores</h3>
+<div class="maps-grid">
+
+    <!-- Owerri Branch -->
+    <div class="map-card">
+        <h4>Owerri Branch</h4>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4723.204688775534!2d7.0367926289697005!3d5.4585056002919075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104259ce22893e9f%3A0x9d4ec744b545950b!2sMIC%20ENTERPRISES!5e0!3m2!1sen!2sng!4v1783618879503!5m2!1sen!2sng"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        <p><strong>No. 127 Alaba Market, Owerri, Imo State.</strong></p>
+    </div>
+
+    <!-- Lekki Branch -->
+    <div class="map-card">
+        <h4>Lekki Branch</h4>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.6022874344703!2d3.4769917740454157!3d6.445082024071617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf504d0b5da3b%3A0x8ad968ff705c303!2sItedo%20market!5e0!3m2!1sen!2sng!4v1783619204739!5m2!1sen!2sng"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="strict-origin-when-cross-origin">
+        </iframe>
+        <p><strong>Itedo Market, Freedom Way, Lekki Phase 1, Lagos.</strong></p>
+    </div>
+</div>
 
     <p><strong>Payment:</strong> Bank transfer / cash on delivery</p>
   </section>
@@ -392,8 +573,8 @@
   <section class="reviews">
     <h2>Customer Reviews</h2>
     <div class="review-card">
-      <p>✔ Best quality drinks and fast delivery in Owerri.</p>
-      <h4>- Happy Customer</h4>
+      <p>✔ I ordered Hennessy for my birthday and got it within two hours.</p>
+      <h4>-  Samuel O.</h4>
     </div>
     <div class="review-card">
       <p>✔ Trusted wine seller. I got my order same day.</p>
@@ -409,6 +590,35 @@
     💬 Order on WhatsApp
   </a>
 
+<section class="faq">
+    <h2>Frequently Asked Questions</h2>
+
+    <details class="faq-item">
+        <summary>Do you deliver?</summary>
+        <p>Yes. We deliver to Owerri, Lagos, Port Harcourt, Obigbo, Aba, Mbaise, Orlu, Umuahia, and Enugu (bulk orders).</p>
+    </details>
+
+    <details class="faq-item">
+        <summary>Can I pay after delivery?</summary>
+        <p>Yes, depending on your location and the type of order.</p>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do you sell wholesale?</summary>
+        <p>Yes. We offer wholesale prices for bulk purchases.</p>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do you supply hotels?</summary>
+        <p>Yes. We supply hotels, restaurants, bars, clubs, supermarkets, event planners, and corporate organizations.</p>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do you deliver the same day?</summary>
+        <p>Yes. Same-day delivery is available for many locations, subject to order time and availability.</p>
+    </details>
+</section>
+
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-brand">
@@ -418,7 +628,7 @@
       <div class="footer-links">
         <h3>Quick Links</h3>
         <a href="#wine">Wine</a>
-        <a href="#hot">Hot Drinks</a>
+        <a href="#whiskey">Hot Drinks</a>
         <a href="#spirits">Spirits</a>
         <a href="#juice">Juice</a>
          <a href="#soft">Can Drinks</a>
@@ -446,7 +656,11 @@
 
   <button id="topBtn" onclick="window.scrollTo({ top:0, behavior:'smooth' })">↑</button>
 
+  
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-  <script src="script.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>
