@@ -181,7 +181,7 @@ async function verifyPayment(reference) {
     const data = await response.json();
 
     console.log("Status:", response.status);
-    console.log("Response:", data);
+    console.log("Response:", JSON.stringify(data, null, 2));
 
     return data;
 }

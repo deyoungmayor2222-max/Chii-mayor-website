@@ -5,16 +5,29 @@ export default async function handler(req, res) {
 
   const { reference } = req.body;
 
+console.log("Reference:", reference);
+console.log(
+  "Secret key available:",
+  !!process.env.PAYSTACK_SECRET_KEY
+);
+
   if (!reference) {
     return res.status(400).json({ error: "Payment reference is required." });
   }
 
   try {
+
+    const secretKey = process.env.PAYSTACK_SECRET_KEY;
+
+    console.log("Secret key exists:", !!secretKey);
+    console.log("Secret key prefix:", secretKey?.substring(0, 8));
+    console.log("Secret key length:", secretKey?.length);
+
     const response = await fetch(
       `https://api.paystack.co/transaction/verify/${reference}`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+          Authorization: `Bearer ${secretKey}`,
         },
       }
     );
