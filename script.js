@@ -9,6 +9,21 @@ let total = 0;
 let cart = [];
 
 const DELIVERY_FEE = 3000; // Delivery fee in Naira
+
+function showLoading() {
+    const overlay = document.getElementById("loading-overlay");
+    if (overlay) {
+        overlay.style.display = "flex";
+    }
+}
+
+function hideLoading() {
+    const overlay = document.getElementById("loading-overlay");
+    if (overlay) {
+        overlay.style.display = "none";
+    }
+}
+
 function welcomeMessage() {
     alert("Welcome to Chii-Mayor Business Ventures!");
 }
@@ -228,6 +243,7 @@ console.log({
 },
 
         onClose: function() {
+             hideLoading();
             alert("Payment cancelled.");
         }
 
@@ -315,24 +331,31 @@ const orderDate = new Date().toLocaleString("en-NG", {
 
         onSuccess: async function (reference) {
 
-   const verification = await verifyPayment(reference);
+    showLoading();
 
-console.log("Verification Response:", verification);
+    try {
 
-if (
-    !verification.status ||
-    !verification.data ||
-    verification.data.status !== "success"
-) {
-    console.error("Verification failed:", verification);
+        const verification = await verifyPayment(reference);
 
-    alert(
-        "Payment verification failed.\n\n" +
-        JSON.stringify(verification, null, 2)
-    );
+        console.log("Verification Response:", verification);
 
-    return;
-}
+        if (
+            !verification.status ||
+            !verification.data ||
+            verification.data.status !== "success"
+        ) {
+
+            console.error("Verification failed:", verification);
+
+            alert(
+                "Payment verification failed.\n\n" +
+                JSON.stringify(verification, null, 2)
+            );
+
+            return;
+        }
+
+        // Keep ALL your existing success code here
 
     const orderItems = cart.map(item => 
         `${item.product} x${item.qty} = ₦${item.itemTotal.toLocaleString()}`
@@ -447,6 +470,20 @@ try {
 // Reset form and cart whether email succeeds or fails
 document.getElementById("customer-form").reset();
 clearCart();
+
+} catch (error) {
+
+    console.error(error);
+
+    alert(
+        "An unexpected error occurred while processing your payment."
+    );
+
+} finally {
+
+    hideLoading();
+
+}
 
 } // End of onSuccess
 
