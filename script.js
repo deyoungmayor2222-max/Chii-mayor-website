@@ -24,6 +24,23 @@ function hideLoading() {
     }
 }
 
+function setLoadingMessage(title, message) {
+
+    const heading =
+        document.querySelector("#loading-overlay h3");
+
+    const paragraph =
+        document.querySelector("#loading-overlay p");
+
+    if (heading) {
+        heading.textContent = title;
+    }
+
+    if (paragraph) {
+        paragraph.textContent = message;
+    }
+}
+
 function welcomeMessage() {
     alert("Welcome to Chii-Mayor Business Ventures!");
 }
@@ -290,9 +307,16 @@ async function sendCustomerEmail(orderData) {
     const phone = document.getElementById("customer-phone").value.trim();
     const email = document.getElementById("customer-email").value.trim();
 
-    const deliveryMethod = document.querySelector(
-        'input[name="delivery"]:checked'
-    ).value;
+    const selectedDelivery = document.querySelector(
+    'input[name="delivery"]:checked'
+);
+
+if (!selectedDelivery) {
+    alert("Please select a delivery method.");
+    return;
+}
+
+const deliveryMethod = selectedDelivery.value;
 
     if (!name || !phone || !email) {
         alert("Please complete all required fields.");
@@ -321,17 +345,40 @@ const orderDate = new Date().toLocaleString("en-NG", {
     timeStyle: "medium"
 });
 
-   await startPaystackPayment({
+// Show loading before Paystack opens
+showLoading();
 
-        name,
-        phone,
-        email,
-        amount: grandTotal,
-        reference: paymentReference,
+setLoadingMessage(
+    "Opening Secure Payment...",
+    "Connecting to Paystack..."
+);
 
-        onSuccess: async function (reference) {
+await startPaystackPayment({
+
+    name,
+    phone,
+    email,
+    amount: grandTotal,
+    reference: paymentReference,
+
+    onSuccess: async function (reference) {
 
     showLoading();
+
+    // Default loading message
+    setLoadingMessage(
+        "Processing Your Order...",
+        "Please wait while we verify your payment."
+    );
+
+    // Give the overlay a moment to appear
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Update to the next stage
+    setLoadingMessage(
+        "Verifying Payment...",
+        "Please wait while we confirm your payment."
+    );
 
     try {
 
@@ -344,7 +391,7 @@ const orderDate = new Date().toLocaleString("en-NG", {
             !verification.data ||
             verification.data.status !== "success"
         ) {
-
+       
             console.error("Verification failed:", verification);
 
             alert(
@@ -354,6 +401,14 @@ const orderDate = new Date().toLocaleString("en-NG", {
 
             return;
         }
+    // Verification succeeded
+
+setLoadingMessage(
+    "Preparing Your Order...",
+    "Generating your order details..."
+);
+
+await new Promise(resolve => setTimeout(resolve, 700));
 
         // Keep ALL your existing success code here
 
@@ -449,9 +504,13 @@ const orderData = {
 
 try {
 
+     setLoadingMessage(
+    "Sending Confirmation...",
+    "We're sending your receipt and notifying our team."
+);
+    await new Promise(resolve => setTimeout(resolve, 700));
     // Send notification to the business owner
     await sendAdminEmail(orderData);
-
     // Send confirmation to the customer
     await sendCustomerEmail(orderData);
 
@@ -466,8 +525,20 @@ try {
     alert("Payment was successful, but one or more confirmation emails could not be sent.");
 
 }
+  setLoadingMessage(
+    "Finalizing Order...",
+    "Your order is almost complete."
+);
 
-// Reset form and cart whether email succeeds or fails
+await new Promise(resolve => setTimeout(resolve, 1200));
+
+setLoadingMessage(
+    "Order Complete!",
+    "Thank you for shopping with Chii-Mayor Business Ventures."
+);
+
+await new Promise(resolve => setTimeout(resolve, 1000));
+
 document.getElementById("customer-form").reset();
 clearCart();
 
