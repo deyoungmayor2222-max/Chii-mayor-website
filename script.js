@@ -372,7 +372,7 @@ await startPaystackPayment({
     );
 
     // Give the overlay a moment to appear
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     // Update to the next stage
     setLoadingMessage(
@@ -408,7 +408,7 @@ setLoadingMessage(
     "Generating your order details..."
 );
 
-await new Promise(resolve => setTimeout(resolve, 700));
+await new Promise(resolve => setTimeout(resolve, 900));
 
         // Keep ALL your existing success code here
 
@@ -508,7 +508,7 @@ try {
     "Sending Confirmation...",
     "We're sending your receipt and notifying our team."
 );
-    await new Promise(resolve => setTimeout(resolve, 700));
+    await new Promise(resolve => setTimeout(resolve, 800));
     // Send notification to the business owner
     await sendAdminEmail(orderData);
     // Send confirmation to the customer
