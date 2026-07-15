@@ -1,0 +1,25 @@
+{
+  "name": "Chii-Mayor Business Ventures",
+  "short_name": "Chii-Mayor",
+  "description": "Premium wines, spirits, beverages and drinks in Nigeria.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#650c1d",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/Chii-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/Chii-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
