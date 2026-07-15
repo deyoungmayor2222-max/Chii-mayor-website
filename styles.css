@@ -184,21 +184,7 @@ header p {
     line-height: 1.8;
     opacity: 0.95;
 }
-.navbar {
-    background: rgba(17,17,17,0.92);
-    display:flex;
-    justify-content: space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap: 20px;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 999px;
-    max-width: 1100px;
-    margin: 25px auto 20px;
-    padding: 12px 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-    top: 0;
-}
+
 nav a{
   color: white;
   text-decoration: none;
@@ -241,14 +227,25 @@ a{
 /* Sticky Navigation */
 .navbar{
     position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    width:90%;
+    max-width:1100px;
+    margin:25px auto;
+
+    padding:15px 25px;
+
+    background:rgba(17,17,17,.92);
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
 }
 
 .hero{
@@ -262,23 +259,88 @@ a{
     box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
 .hero h2 {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
     margin-bottom: 20px;
 }
 .hero button{
-  margin-top:20px;
-  padding:14px 28px;
-  border: none;
-  border-radius: 30px;
-  background: linear-gradient(135deg, #18a8d9, #6c1741);
-  color:white;
-  opacity: 0.95;
-  cursor: pointer;
-  box-shadow: 0 10px 18px rgba(0,0,0,0.25);
+  margin-top:25px;
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#00bcd4,#650c1d);
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.35s;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 .hero button:hover{
-    transform: translateY(-3px);
+   transform:translateY(-4px) scale(1.03);
     box-shadow: 0 8px 20px rgba(0,188,212,0.5);
+}
+
+/* ===========================
+   CALL TO ACTION SECTION
+=========================== */
+
+.cta {
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
+    background: linear-gradient(135deg, #7b1113, #b22222, #650c1d);
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+     border:3px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(8px);
+    transition:.3s;
+    animation:cardFade .8s ease;
+}
+
+.cta:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 15px 40px rgba(0,188,212,.25);
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.cta p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    opacity: 0.95;
+}
+
+.cta a {
+    display: inline-block;
+   background:linear-gradient(135deg, #00bcd4, #650c1d);
+    color: #fff;
+    text-decoration: none;
+    letter-spacing:.5px;
+    padding: 15px 35px;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 18px rgba(0,0,0,.3);
+}
+
+.cta a:hover{
+    transform:translateY(-4px);
+    background:gold;
+    color:#111;
+}
+
+.cta a:active {
+    transform: translateY(0);
 }
 
 .featured, .promo {
@@ -344,7 +406,8 @@ a{
 }
 
 .brand-grid span{
-    background:#1f1919;
+    background:rgba(201, 193, 193, 0.08);
+    border:5px solid rgba(255,255,255,.15);
     padding:12px 22px;
     border-radius:30px;
     font-weight:600;
@@ -372,6 +435,20 @@ section h2 {
     letter-spacing: 0.08em;
 }
 
+.secure-payment{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin:15px 0;
+    padding:12px;
+    background:rgba(40,167,69,.12);
+    border:1px solid rgba(40,167,69,.4);
+    border-radius:10px;
+    color:#28a745;
+    font-size:25px;
+    font-weight:600;
+}
 
 #cart{
     width: 90%;
@@ -401,6 +478,13 @@ section h2 {
   margin: 20px auto;
 }
 
+.price {
+    color: #650c1d;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 5px 0;
+}
+
 .card {
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(6px);
@@ -413,6 +497,7 @@ section h2 {
   justify-content: space-between;
   animation: cardFade  0.8s ease;
   height: 100%;
+  border: 3px solid rgba(255,255,255,0.15);
 }
 
 .card button{
@@ -473,6 +558,7 @@ button:focus, nav a:focus{
 .card img:hover{
   transform: scale(1.05);
 }
+
 h2{
   color: white;
   font-weight: bold;
@@ -506,7 +592,8 @@ h3{
 }
 
 .trust p {
-    background: #816868;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(8px);
     display: inline-block;
     margin: 10px;
     padding: 15px 20px;
@@ -547,7 +634,7 @@ h3{
   box-shadow: 0 14px 30px rgba(0,0,0,0.24);
   background: rgba(11, 94, 11, 0.55);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 3px solid rgba(255,255,255,0.15);
 }
 
 .contact p{
@@ -559,6 +646,10 @@ h3{
 }
 .contact a:hover{
   color: blue;
+}
+
+.contact:hover{
+    box-shadow:0 0 30px rgba(0,255,100,.25);
 }
 
 /* ==========================
@@ -806,12 +897,12 @@ nav input#search:focus{
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     text-align: left;
-    border-left: 4px solid var(--accent);
+     border-left:5px solid gold;
 }
 
 .review-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 188, 212, 0.3);
+     box-shadow:0 0 25px rgba(255,215,0,.3);
 }
 
 .review-card p {
@@ -945,6 +1036,7 @@ nav input#search:focus{
   border-radius: 20px;
   margin: 50px auto 0;
   max-width: 1100px;
+  backdrop-filter:blur(5px);
 }
 
 .footer-container {
@@ -1011,6 +1103,78 @@ nav input#search:focus{
 
 .footer-social h3{
     margin-bottom:15px;
+}
+
+.policy-page{
+    max-width:900px;
+    margin:40px auto;
+    padding:20px;
+    background: #726a6a;
+    color:#333;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.policy-page h1{
+    color: rgb(28, 187, 28);
+    margin-bottom:20px;
+}
+
+.policy-page h2{
+    margin-top:30px;
+    color:#650c1d;
+}
+
+.policy-page p,
+.policy-page li{
+    line-height:1.8;
+    color: whitesmoke;
+}
+
+.footer-policies{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.footer-policies a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.footer-policies a:hover{
+    color:gold;
+}
+
+.back-home{
+    display:inline-block;
+    margin-top:30px;
+    padding:12px 24px;
+    background:#650c1d;
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:8px;
+    transition:all 0.3s ease;
+}
+
+.back-home:hover{
+    background:#8b1029;
+    color:#ffd700;
+    transform:translateY(-2px);
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+.contact-info a{
+    color: gold;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.contact-info a:hover{
+    color: blue;
+    text-decoration: underline;
 }
 
 .social-icons{
@@ -1165,4 +1329,93 @@ img{
     .menu-toggle {
         display: none;
     }
+}
+
+@media (max-width: 768px) {
+    .cta {
+        padding: 40px 30px;
+    }
+
+    .cta h2 {
+        font-size: 1.6rem;
+    }
+
+    .cta p {
+        font-size: 1rem;
+    }
+
+    .cta a {
+        width: 100%;
+        max-width: 280px;
+        padding: 14px;
+    }
+}
+
+/* ===========================
+   Privacy / Terms / Refund Pages
+   Mobile Responsive
+=========================== */
+
+@media (max-width:768px){
+
+.policy-page{
+    width:90%;
+    margin:20px auto;
+    padding:20px;
+}
+
+.policy-page h1{
+    font-size:2rem;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.policy-page h2{
+    font-size:1.4rem;
+    margin-top:30px;
+    margin-bottom:12px;
+    line-height:1.3;
+}
+
+.policy-page p{
+    font-size:1rem;
+    line-height:1.8;
+}
+
+.policy-page li{
+    font-size:1rem;
+    margin-bottom:10px;
+    line-height:1.6;
+}
+
+.back-home{
+    display:block;
+    width:100%;
+    text-align:center;
+    padding:14px;
+    font-size:1rem;
+    margin-top:30px;
+}
+
+}
+
+@media (max-width:480px){
+
+.policy-page{
+    padding:18px;
+}
+
+.policy-page h1{
+    font-size:1.7rem;
+}
+
+.policy-page h2{
+    font-size:1.25rem;
+}
+
+.policy-page p,
+.policy-page li{
+    font-size:0.95rem;
+}
+
 }

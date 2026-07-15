@@ -67,10 +67,21 @@ function searchProduct() {
 
 /* ADD TO CART */
 function addToCart(product, price, qty = 1) {
-    const itemTotal = price * qty;
 
-    cart.push({ product, qty, itemTotal });
-    total += itemTotal;
+    const existing = cart.find(item => item.product === product);
+
+    if (existing) {
+        existing.qty += qty;
+        existing.itemTotal += price * qty;
+    } else {
+        cart.push({
+            product,
+            qty,
+            itemTotal: price * qty
+        });
+    }
+
+    total += price * qty;
 
     renderCart();
     saveCart();
@@ -175,19 +186,14 @@ function clearCart() {
     alert("Cart cleared");
 }
 
-/* GENERATE ORDER NUMBER */
+ /* GENERATE ORDER NUMBER */
 function generateOrderNumber() {
 
     const date = new Date();
 
-    return "ORD-" +
-        date.getFullYear() +
-        (date.getMonth()+1).toString().padStart(2,"0") +
-        date.getDate().toString().padStart(2,"0") +
-        "-" +
-        Math.floor(1000 + Math.random() * 9000);
-}
+    return `CMV-${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}-${Math.floor(Math.random() * 900000 + 100000)}`;
 
+}
 
 /* GENERATE PAYSTACK REFERENCE */
 function generatePaymentReference() {
@@ -295,13 +301,18 @@ async function sendCustomerEmail(orderData) {
 /* CHECKOUT */
  async function checkout() {
 
-     alert("Checkout started");
-
     if (cart.length === 0) {
         alert("Your cart is empty.");
         return;
     }
+ showLoading();
 
+    setLoadingMessage(
+        "Preparing Checkout...",
+        "Checking your order information."
+    );
+
+    await new Promise(resolve => setTimeout(resolve, 500));
     const name = document.getElementById("customer-name").value.trim();
     const address = document.getElementById("customer-address").value.trim();
     const phone = document.getElementById("customer-phone").value.trim();
@@ -312,6 +323,7 @@ async function sendCustomerEmail(orderData) {
 );
 
 if (!selectedDelivery) {
+    hideLoading();
     alert("Please select a delivery method.");
     return;
 }
@@ -319,11 +331,13 @@ if (!selectedDelivery) {
 const deliveryMethod = selectedDelivery.value;
 
     if (!name || !phone || !email) {
+            hideLoading();
         alert("Please complete all required fields.");
         return;
     }
 
     if (deliveryMethod === "Home Delivery" && address === "") {
+           hideLoading();
         alert("Please enter your delivery address.");
         return;
     }
@@ -346,7 +360,6 @@ const orderDate = new Date().toLocaleString("en-NG", {
 });
 
 // Show loading before Paystack opens
-showLoading();
 
 setLoadingMessage(
     "Opening Secure Payment...",
@@ -393,7 +406,7 @@ await startPaystackPayment({
         ) {
        
             console.error("Verification failed:", verification);
-
+            hideLoading();
             alert(
                 "Payment verification failed.\n\n" +
                 JSON.stringify(verification, null, 2)
@@ -460,10 +473,15 @@ message += `Need help?\n`;
 message += `Reply to this WhatsApp message or call 09030400538.\n`;
 message += `We look forward to serving you again!`;
 
-window.open(
+
+const whatsappWindow = window.open(
     `https://wa.me/2349030400538?text=${encodeURIComponent(message)}`,
     "_blank"
 );
+
+if (!whatsappWindow) {
+    alert("Please allow pop-ups to open WhatsApp.");
+}
 
 document.getElementById("payment-status").innerHTML = `
 <div style="
@@ -522,7 +540,20 @@ try {
     console.error("EmailJS Message:", err.text);
     console.error(err);
 
-    alert("Payment was successful, but one or more confirmation emails could not be sent.");
+    // Show warning on the page
+    document.getElementById("payment-status").innerHTML += `
+    <div class="warning-box">
+        <strong>⚠ Payment received successfully.</strong><br><br>
+
+        However, we couldn't send your email receipt.<br>
+
+        Please contact us if you don't receive your confirmation.
+    </div>
+    `;
+
+    alert(
+        "Payment was successful, but your confirmation email could not be sent."
+    );
 
 }
   setLoadingMessage(
