@@ -1193,6 +1193,7 @@ nav input#search:focus{
     transform:translateY(-3px);
 }
 
+
 /* ===========================
    LOADING OVERLAY
 =========================== */
@@ -1417,5 +1418,4 @@ img{
 .policy-page li{
     font-size:0.95rem;
 }
-
 }

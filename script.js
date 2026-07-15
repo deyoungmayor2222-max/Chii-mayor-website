@@ -473,7 +473,6 @@ message += `Need help?\n`;
 message += `Reply to this WhatsApp message or call 09030400538.\n`;
 message += `We look forward to serving you again!`;
 
-
 const whatsappWindow = window.open(
     `https://wa.me/2349030400538?text=${encodeURIComponent(message)}`,
     "_blank"
