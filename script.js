@@ -24,6 +24,24 @@ function hideLoading() {
     }
 }
 
+function customAlert(message) {
+    const overlay = document.getElementById("custom-alert-overlay");
+    const msgElement = document.getElementById("custom-alert-message");
+    if (overlay && msgElement) {
+        msgElement.textContent = message;
+        overlay.style.display = "flex";
+    } else {
+        alert(message); // Fallback
+    }
+}
+
+function closeCustomAlert() {
+    const overlay = document.getElementById("custom-alert-overlay");
+    if (overlay) {
+        overlay.style.display = "none";
+    }
+}
+
 function setLoadingMessage(title, message) {
 
     const heading =
@@ -42,7 +60,7 @@ function setLoadingMessage(title, message) {
 }
 
 function welcomeMessage() {
-    alert("Welcome to Chii-Mayor Business Ventures!");
+    customAlert("Welcome to Chii-Mayor Business Ventures!");
 }
 
 /* SEARCH */
@@ -86,7 +104,7 @@ function addToCart(product, price, qty = 1) {
     renderCart();
     saveCart();
 
-    alert(product + " added to cart");
+    customAlert(product + " added to cart");
 }
 
 /* RENDER CART */
@@ -149,7 +167,7 @@ function removeItem(index) {
     renderCart();
     saveCart();
 
-    alert("Item removed");
+    customAlert("Item removed");
 }
 
 /* ADD WITH QTY */
@@ -183,7 +201,7 @@ function clearCart() {
 
     renderCart();
 
-    alert("Cart cleared");
+    customAlert("Cart cleared");
 }
 
  /* GENERATE ORDER NUMBER */
@@ -267,7 +285,7 @@ console.log({
 
         onClose: function() {
              hideLoading();
-            alert("Payment cancelled.");
+            customAlert("Payment cancelled.");
         }
 
     });
@@ -302,7 +320,7 @@ async function sendCustomerEmail(orderData) {
  async function checkout() {
 
     if (cart.length === 0) {
-        alert("Your cart is empty.");
+        customAlert("Your cart is empty.");
         return;
     }
  showLoading();
@@ -324,7 +342,7 @@ async function sendCustomerEmail(orderData) {
 
 if (!selectedDelivery) {
     hideLoading();
-    alert("Please select a delivery method.");
+    customAlert("Please select a delivery method.");
     return;
 }
 
@@ -332,13 +350,13 @@ const deliveryMethod = selectedDelivery.value;
 
     if (!name || !phone || !email) {
             hideLoading();
-        alert("Please complete all required fields.");
+        customAlert("Please complete all required fields.");
         return;
     }
 
     if (deliveryMethod === "Home Delivery" && address === "") {
            hideLoading();
-        alert("Please enter your delivery address.");
+        customAlert("Please enter your delivery address.");
         return;
     }
 
@@ -407,7 +425,7 @@ await startPaystackPayment({
        
             console.error("Verification failed:", verification);
             hideLoading();
-            alert(
+            customAlert(
                 "Payment verification failed.\n\n" +
                 JSON.stringify(verification, null, 2)
             );
@@ -479,7 +497,7 @@ const whatsappWindow = window.open(
 );
 
 if (!whatsappWindow) {
-    alert("Please allow pop-ups to open WhatsApp.");
+    customAlert("Please allow pop-ups to open WhatsApp.");
 }
 
 document.getElementById("payment-status").innerHTML = `
@@ -550,7 +568,7 @@ try {
     </div>
     `;
 
-    alert(
+    customAlert(
         "Payment was successful, but your confirmation email could not be sent."
     );
 
@@ -576,7 +594,7 @@ clearCart();
 
     console.error(error);
 
-    alert(
+    customAlert(
         "An unexpected error occurred while processing your payment."
     );
 
@@ -595,7 +613,7 @@ clearCart();
 /* SIMPLE WHATSAPP ORDER */
 function sendWhatsappOrder() {
     if (cart.length === 0) {
-        alert("Cart is empty");
+        customAlert("Cart is empty");
         return;
     }
 
